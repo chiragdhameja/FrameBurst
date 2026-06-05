@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(.venv/Scripts/python.exe --version)",
+      "Bash(.venv/Scripts/python.exe -c \"import sys; sys.path.insert\\(0,'scripts'\\); import config; print\\('FFMPEG :', config.FFMPEG\\); print\\('FFPROBE:', config.FFPROBE\\); print\\('ROOT   :', config.ROOT\\)\")",
+      "Bash(.venv/Scripts/python.exe -c \"import faster_whisper; print\\('faster-whisper OK, version', getattr\\(faster_whisper,'__version__','?'\\)\\)\")",
+      "Bash(\"C:/Users/chira/AppData/Local/Microsoft/WinGet/Links/ffmpeg.exe\" -version)",
+      "Bash(./vidcut.ps1 list *)",
+      "Bash(echo \"EXIT: $?\")",
+      "PowerShell(cd D:\\\\Projects\\\\VidCut; \"yt-dlp version: $\\(.\\\\.venv\\\\Scripts\\\\python.exe -m yt_dlp --version\\)\")",
+      "mcp__claude_ai_Gmail__search_threads",
+      "mcp__claude_ai_Gmail__create_draft",
+      "Bash(wc -c)",
+      "Bash(echo '--- bytes: __CMDSUB_OUTPUT__ ---')",
+      "Bash(cat C:/Users/chira/AppData/Local/Temp/claude/d--Projects-VidCut/413a8430-e1f7-4328-b245-286c2a42169f/tasks/byawtf7sb.output)",
+      "Bash(echo \"--- input dir ---\")",
+      "Bash(ls -la /d/Projects/VidCut/input/)",
+      "Bash(grep -vE '^\\\\s*$')",
+      "PowerShell(cd D:\\\\Projects\\\\VidCut; $aria = \"$env:LOCALAPPDATA\\\\Microsoft\\\\WinGet\\\\Links\\\\aria2c.exe\"; .\\\\.venv\\\\Scripts\\\\python.exe -m yt_dlp -S \"res:1080\" --downloader \"$aria\" --downloader-args \"aria2c:-x16 -s16 -k1M\" --merge-output-format mp4 -o \"input\\\\%\\(title\\)s.%\\(ext\\)s\" \"https://www.youtube.com/watch?v=7k1ehaE0bdU\")",
+      "Bash(grep -iv '^total\\\\|\\\\.$')",
+      "Bash(echo \"=== HF cache size ===\"; du -sh ~/.cache/huggingface 2>/dev/null; find ~/.cache/huggingface -name \"*.bin\" -o -name \"*.incomplete\" 2>/dev/null | head; echo \"=== transcribe.py ===\"; cat /d/Projects/VidCut/scripts/transcribe.py)",
+      "Read(//c/Users/chira/.cache/huggingface/**)",
+      "Read(//d/Projects/VidCut/**)",
+      "PowerShell(cd D:\\\\Projects\\\\VidCut; $sw = [System.Diagnostics.Stopwatch]::StartNew\\(\\); .\\\\vidcut.ps1 reels \"clips\\\\JRE2255_first30.clips.json\"; $sw.Stop\\(\\); \"ELAPSED_SECONDS: $\\([math]::Round\\($sw.Elapsed.TotalSeconds,1\\)\\)\")",
+      "Bash(.venv/Scripts/python.exe -c ' *)"
+    ]
+  }
+}

@@ -1,0 +1,44 @@
+# --- Python ---
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# --- Bundled tools / binaries (ffmpeg, yt-dlp, aria2c, etc.) ---
+bin/
+tools/
+
+# --- Media working directories (source + generated) ---
+input/
+output/
+clips/
+work/
+
+# --- Common media file types (in case they land elsewhere) ---
+*.mp4
+*.mkv
+*.mov
+*.webm
+*.avi
+*.m4a
+*.mp3
+*.wav
+*.aac
+*.srt
+*.ass
+*.vtt
+
+# --- Editor / OS cruft ---
+.DS_Store
+Thumbs.db
+*.swp
+*.tmp
+*.log
+.vscode/
+.idea/
