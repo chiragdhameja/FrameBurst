@@ -100,10 +100,10 @@ def _caption_ass(words, start, end, out_path, speakers,
     for cue in cues:
         a = max(0.0, cue[0]["start"] - start)
         b = max(a + 0.3, cue[-1]["end"] - start)
-        mid = (cue[0]["start"] + cue[-1]["end"]) / 2.0
-        accent = ACCENT.get(_role_at(mid, speakers), ACCENT["guest"])
+        # Captions kept plain white (black outline from the style) for now —
+        # per-speaker colour accents were turned off by request.
         text = "".join(w["word"] for w in cue).strip().upper().replace("\n", " ")
-        ov = "{\\an5\\pos(%d,%d)\\3c%s}" % (x, y, accent)
+        ov = "{\\an5\\pos(%d,%d)}" % (x, y)
         out.append(f"Dialogue: 0,{_ass_ts(a)},{_ass_ts(b)},Cap,,0,0,0,,{ov}{text}")
     with open(out_path, "w", encoding="utf-8") as f:
         f.write("\n".join(out))
@@ -124,9 +124,19 @@ def build_clip(source_abs, clip, work, outdir):
     n_cues = _caption_ass(words, start, start + dur,
                           os.path.join(work, sub_name), speakers) if words else 0
 
-    vf = (f"scale={config.REEL_W}:{config.REEL_H}:"
-          f"force_original_aspect_ratio=increase,"
-          f"crop={config.REEL_W}:{config.REEL_H}")
+    # Reframe mode: "cover" (default) center-crops to fill the frame — best for
+    # single centered speakers. "fit" letterboxes the whole 16:9 frame onto a
+    # blurred copy of itself — use for panels / videos with on-screen graphics
+    # so nothing important is cropped and captions sit in the clean lower band.
+    W, H = config.REEL_W, config.REEL_H
+    if clip.get("reframe", "cover") == "fit":
+        vf = (f"[0:v]split=2[bg][fg];"
+              f"[bg]scale={W}:{H}:force_original_aspect_ratio=increase,"
+              f"crop={W}:{H},boxblur=20:2[bg2];"
+              f"[fg]scale={W}:{H}:force_original_aspect_ratio=decrease[fg2];"
+              f"[bg2][fg2]overlay=(W-w)/2:(H-h)/2")
+    else:
+        vf = (f"scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H}")
     if n_cues:
         vf += f",ass={sub_name}"
 
